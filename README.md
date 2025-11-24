@@ -73,4 +73,4 @@ MIT License - Feel free to use and modify!
 
 ---
 
-Made with ❤️ using WebAssembly
+Made with ❤h️ using WebAssembly
