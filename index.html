@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebP Converter - Client Side</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20fill='none'%20stroke='%232dd4bf'%20stroke-linecap='round'%20stroke-linejoin='round'%20viewBox='0%200%2024%2024'%20stroke-width='2'><path%20d='M16%203h5v5m-4%2013h2a2%202%200%200%200%202-2m0-7v3m0-12-5%205M3%207V5a2%202%200%200%201%202-2m0%2018%204.144-4.144a1.21%201.21%200%200%201%201.712%200L13%2019M9%203h3'/><rect%20width='10'%20height='10'%20x='3'%20y='11'%20rx='1'/></svg>" />
+</head>
+<body>
+    <div id="app">
+        <div id="mainMenu" class="drop-zone-mode center-content">
+            <div class="drop-area-box">
+                <h1>WebP Converter</h1>
+                <p class="subtitle">100% Client-Side • No Upload • Privacy First</p>
+                <div class="button-container">
+                    <button id="singleModeBtn" class="action-button">📸 Single Image</button>
+                    <button id="batchModeBtn" class="action-button">📂 Batch Convert</button>
+                </div>
+                <div id="status" class="status-message"></div>
+            </div>
+        </div>
+
+        <div id="singleMode" class="editor-mode hidden">
+            <header>
+                <h2>Single Image Converter</h2>
+                <div class="header-controls">
+                    <button id="backToMenuBtn1" class="back-button">← Back</button>
+                    <div id="singleStatus"></div>
+                </div>
+            </header>
+
+            <main id="singleMain">
+                <div class="comparison-wrapper">
+                    <h3>Upload Image</h3>
+                    <input type="file" id="singleImageInput" accept="image/jpeg,image/png,image/jpg" class="hidden">
+                    <div id="singleDropZone" class="upload-drop-zone center-content">
+                        <p>Drop JPG/PNG here or <span class="upload-link">click to browse</span></p>
+                    </div>
+                </div>
+
+                <div id="singleSliderWrapper" class="comparison-wrapper hidden">
+                    <h3>Comparison</h3>
+                    <div id="singleSlider" class="before-after-slider"></div>
+                    <div class="single-controls">
+                        <button id="downloadSingleBtn">Download WebP</button>
+                        <button id="reconvertBtn">Re-Convert</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div id="batchMode" class="editor-mode hidden">
+            <header>
+                <h2>Batch Converter</h2>
+                <div class="header-controls">
+                    <button id="backToMenuBtn2" class="back-button">← Back</button>
+                    <div id="batchStatus"></div>
+                </div>
+            </header>
+
+            <main id="batchMain">
+                <div class="comparison-wrapper">
+                    <h3>Select Multiple Images</h3>
+                    <input type="file" id="batchImageInput" accept="image/jpeg,image/png,image/jpg" multiple class="hidden">
+                    <div id="batchDropZone" class="upload-drop-zone center-content">
+                        <p>Drop multiple JPG/PNG files here or <span class="upload-link">click to browse</span></p>
+                    </div>
+                    <div id="batchProgress" class="hidden">
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                        <p id="progressText">Processing: 0/0</p>
+                    </div>
+                    <div id="batchResults" class="hidden">
+                        <button id="downloadAllBtn" class="action-button">📦 Download All as ZIP</button>
+                        <div id="resultsList"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <aside id="configPanel">
+            <h3>WebP Settings</h3>
+            <div class="setting-group">
+                <label for="qualityRange">Quality: <span id="qualityValue">80</span></label>
+                <input type="range" id="qualityRange" min="1" max="100" value="80">
+            </div>
+            <div class="setting-group checkbox-group">
+                <input type="checkbox" id="losslessToggle">
+                <label for="losslessToggle">Lossless Mode</label>
+            </div>
+        </aside>
+    </div>
+
+    <snack-bar id="snackbar"></snack-bar>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@jsquash/webp@1.3.0/codec/enc/webp_enc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jsquash/webp@1.3.0/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
